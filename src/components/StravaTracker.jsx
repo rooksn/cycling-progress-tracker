@@ -7,7 +7,7 @@ import imgPoweredByStrava from '../assets/api_logo_pwrdBy_strava_horiz_light.svg
 
 const CLIENT_ID = process.env.REACT_APP_STRAVA_CLIENT_ID;
 const CLIENT_SECRET = process.env.REACT_APP_STRAVA_CLIENT_SECRET;
-const REDIRECT_URI = 'http://localhost:3000';
+const REDIRECT_URI = process.env.REACT_APP_STRAVA_REDIRECT_URI || 'http://localhost:3000';
 const SCOPE = 'read,activity:read_all';
 const DEFAULT_GOAL = 10000;
 
