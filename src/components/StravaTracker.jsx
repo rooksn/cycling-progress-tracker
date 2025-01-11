@@ -76,6 +76,10 @@ const StravaTracker = () => {
       setAccessToken(data.access_token);
       setIsAuthenticated(true);
       fetchActivities(data.access_token);
+
+      // Remove query parameters from the URL
+      const newUrl = window.location.origin + window.location.pathname;
+      window.history.replaceState({}, '', newUrl);
     } catch (error) {
       console.error('Error exchanging token:', error);
     }
@@ -118,7 +122,7 @@ const StravaTracker = () => {
     return (
       <Card className="w-full max-w-4xl">
         <CardHeader>
-          <CardTitle>Connect with Strava</CardTitle>
+          <CardTitle>Start Tracking</CardTitle>
         </CardHeader>
         <CardContent>
           <StravaConnectButton onClick={handleLogin} /> {/* Use the SVG button */}
@@ -134,7 +138,7 @@ const StravaTracker = () => {
   
   const percentComplete = (totalKm / yearGoal) * 100;
   const expectedProgress = (dayOfYear / daysInYear) * 100;
-  const exprectedDistance = (yearGoal / 100) * expectedProgress;
+  const expectedDistance = (yearGoal / 100) * expectedProgress;
   const projectedDistance = (totalKm / dayOfYear) * daysInYear;
   const remainingKm = yearGoal - totalKm;
   const remainingDays = daysInYear - dayOfYear;
@@ -216,7 +220,7 @@ const StravaTracker = () => {
                 <Calendar className="h-5 w-5 text-blue-500" />
                 <div>
                   <div className="font-medium">Expected Progress</div>
-                  <div>{exprectedDistance.toFixed(1)} km ({expectedProgress.toFixed(1)}%)</div>
+                  <div>{expectedDistance.toFixed(1)} km ({expectedProgress.toFixed(1)}%)</div>
                 </div>
               </div>
               
