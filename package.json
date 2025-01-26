@@ -1,7 +1,7 @@
 {
   "name": "progress-tracker",
   "version": "0.1.0",
-  "homepage": "https://mschneider85.github.io/cycling-progress-tracker",
+  "homepage": "https://rooksn.github.io/cycling-progress-tracker",
   "private": true,
   "dependencies": {
     "@radix-ui/react-slot": "^1.1.1",
