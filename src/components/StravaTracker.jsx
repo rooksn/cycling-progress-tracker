@@ -5,13 +5,19 @@ import { Calendar, Target, Bike, TrendingUp, Edit2 } from 'lucide-react';
 import StravaConnectButton from './StravaConnectButton';
 import imgPoweredByStrava from '../assets/api_logo_pwrdBy_strava_horiz_light.svg';
 
-const CLIENT_ID = process.env.REACT_APP_STRAVA_CLIENT_ID;
-const CLIENT_SECRET = process.env.REACT_APP_STRAVA_CLIENT_SECRET;
+
 const REDIRECT_URI = process.env.REACT_APP_STRAVA_REDIRECT_URI || 'http://localhost:3000';
 const SCOPE = 'read,activity:read_all';
 const DEFAULT_GOAL = 10000;
 
 const StravaTracker = () => {
+  const [CLIENT_ID] = React.useState(
+    JSON.parse(localStorage.getItem('clientId')) || ''
+  );
+  
+  const [CLIENT_SECRET] = React.useState(
+    JSON.parse(localStorage.getItem('clientSecret')) || ''
+  );
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [totalKm, setTotalKm] = useState(0);
   const [accessToken, setAccessToken] = useState(null);
@@ -27,6 +33,8 @@ const StravaTracker = () => {
 
     if (authCode && !isAuthenticated) {
       exchangeToken(authCode);
+    } else if (CLIENT_ID != '' && CLIENT_SECRET != '' && !isAuthenticated){
+      handleLogin()
     }
   }, []);
 
